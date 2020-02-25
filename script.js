@@ -110,7 +110,6 @@ const hardSets = {
     "But then maybe Alondra was one of those people who simply took a long time to warm to strangers": "-... ..- - / - .... . -. / -- .- -.-- -... . / .- .-.. --- -. -.. .-. .- / .-- .- ... / --- -. . / --- ..-. / - .... --- ... . / .--. . --- .--. .-.. . / .-- .... --- / ... .. -- .--. .-.. -.-- / - --- --- -.- / .- / .-.. --- -. --. / - .. -- . / - --- / .-- .- .-. -- / - --- / ... - .-. .- -. --. . .-. ..."
 }
 
-// global variables
 let sentence = "";
 let morseCodeSentence = "";
 const element = document.getElementById("user-input");
@@ -120,10 +119,7 @@ let shipTimer = null;
 let intViewportWidth = 0;
 window.innerWidth > 1200 ? intViewportWidth = 1200: intViewportWidth = window.innerWidth;
 
-// event for input testing
-element.onkeyup = testingFunction;
 
-// function that gets a random sentence
 const getRandomString = (setOfTestStrings) => {
     const string = Object.keys(setOfTestStrings);
     const index = Math.floor(Math.random() * (string.length));
@@ -139,8 +135,8 @@ const getRandomString = (setOfTestStrings) => {
 const playEasy = () => {
     getRandomString(easySets);
     document.getElementById("string-output").innerHTML = sentence;
-    seconds = 0; // reset elapsed time every time you want to get another sentence
-    clearInterval(timer); // reset timer
+    seconds = 0; 
+    clearInterval(timer); 
 
     runTimer();
     moveShips();
@@ -229,4 +225,5 @@ const failure = () => {
 
 
 
+element.onkeyup = testingFunction;
 
