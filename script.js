@@ -1,57 +1,57 @@
 const alphabet = {
-    'a': '.-',    'b': '-...',  'c': '-.-.', 'd': '-..',
-    'e': '.',     'f': '..-.',  'g': '--.',  'h': '....',
-    'i': '..',    'j': '.---',  'k': '-.-',  'l': '.-..',
-    'm': '--',    'n': '-.',    'o': '---',  'p': '.--.',
-    'q': '--.-',  'r': '.-.',   's': '...',  't': '-',
-    'u': '..-',   'v': '...-',  'w': '.--',  'x': '-..-',
-    'y': '-.--',  'z': '--..',  ' ': '/',
-    '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
-    '5': '.....', '6': '-....', '7': '--...', '8': '---..', 
-    '9': '----.', '0': '-----', 
+    'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..',
+    'e': '.', 'f': '..-.', 'g': '--.', 'h': '....',
+    'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..',
+    'm': '--', 'n': '-.', 'o': '---', 'p': '.--.',
+    'q': '--.-', 'r': '.-.', 's': '...', 't': '-',
+    'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-',
+    'y': '-.--', 'z': '--..', ' ': '/',
+    '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+    '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+    '9': '----.', '0': '-----',
 }
 
 const morseAlphabet = {
-    "-----":"0",
-    ".----":"1",
-    "..---":"2",
-    "...--":"3",
-    "....-":"4",
-    ".....":"5",
-    "-....":"6",
-    "--...":"7",
-    "---..":"8",
-    "----.":"9",
-    ".-":"a",
-    "-...":"b",
-    "-.-.":"c",
-    "-..":"d",
-    ".":"e",
-    "..-.":"f",
-    "--.":"g",
-    "....":"h",
-    "..":"i",
-    ".---":"j",
-    "-.-":"k",
-    ".-..":"l",
-    "--":"m",
-    "-.":"n",
-    "---":"o",
-    ".--.":"p",
-    "--.-":"q",
-    ".-.":"r",
-    "...":"s",
-    "-":"t",
-    "..-":"u",
-    "...-":"v",
-    ".--":"w",
-    "-..-":"x",
-    "-.--":"y",
-    "--..":"z",
-    "/":" ",
-    "-·-·--":"!",
-    "·-·-·-":".",
-    "--··--":","
+    "-----": "0",
+    ".----": "1",
+    "..---": "2",
+    "...--": "3",
+    "....-": "4",
+    ".....": "5",
+    "-....": "6",
+    "--...": "7",
+    "---..": "8",
+    "----.": "9",
+    ".-": "a",
+    "-...": "b",
+    "-.-.": "c",
+    "-..": "d",
+    ".": "e",
+    "..-.": "f",
+    "--.": "g",
+    "....": "h",
+    "..": "i",
+    ".---": "j",
+    "-.-": "k",
+    ".-..": "l",
+    "--": "m",
+    "-.": "n",
+    "---": "o",
+    ".--.": "p",
+    "--.-": "q",
+    ".-.": "r",
+    "...": "s",
+    "-": "t",
+    "..-": "u",
+    "...-": "v",
+    ".--": "w",
+    "-..-": "x",
+    "-.--": "y",
+    "--..": "z",
+    "/": " ",
+    "-·-·--": "!",
+    "·-·-·-": ".",
+    "--··--": ","
 }
 
 const textToMorse = () => {
@@ -67,7 +67,7 @@ const textToMorse = () => {
 }
 
 const decodeMorse = () => {
-    const morseCode = document.querySelector('#text-input').value; 
+    const morseCode = document.querySelector('#text-input').value;
     // const regex = RegExp("/^[.-]{1,5}(?:[ \t]+[.-]{1,5})*(?:[ \t]+[.-]{1,5}(?:[ \t]+[.-]{1,5})*)*$/");
     // if(regex.test(morseCode)) {
     const output = morseCode.split('/');
@@ -110,12 +110,20 @@ const hardSets = {
     "But then maybe Alondra was one of those people who simply took a long time to warm to strangers": "-... ..- - / - .... . -. / -- .- -.-- -... . / .- .-.. --- -. -.. .-. .- / .-- .- ... / --- -. . / --- ..-. / - .... --- ... . / .--. . --- .--. .-.. . / .-- .... --- / ... .. -- .--. .-.. -.-- / - --- --- -.- / .- / .-.. --- -. --. / - .. -- . / - --- / .-- .- .-. -- / - --- / ... - .-. .- -. --. . .-. ..."
 }
 
+// global variables
 let sentence = "";
 let morseCodeSentence = "";
+const element = document.getElementById("user-input");
 let timer = null;
 let seconds = null;
 let shipTimer = null;
+let intViewportWidth = 0;
+window.innerWidth > 1200 ? intViewportWidth = 1200: intViewportWidth = window.innerWidth;
 
+// event for input testing
+element.onkeyup = testingFunction;
+
+// function that gets a random sentence
 const getRandomString = (setOfTestStrings) => {
     const string = Object.keys(setOfTestStrings);
     const index = Math.floor(Math.random() * (string.length));
@@ -131,8 +139,8 @@ const getRandomString = (setOfTestStrings) => {
 const playEasy = () => {
     getRandomString(easySets);
     document.getElementById("string-output").innerHTML = sentence;
-    seconds = 0;
-    clearInterval(timer);
+    seconds = 0; // reset elapsed time every time you want to get another sentence
+    clearInterval(timer); // reset timer
 
     runTimer();
     moveShips();
@@ -140,10 +148,9 @@ const playEasy = () => {
 }
 
 const testingFunction = () => {
-    if(document.getElementById("user-input").value == getMorseCodeSlice()) {
-        if(document.getElementById("user-input").value == morseCodeSentence) {
-            alert(`Great! It took you ${seconds} seconds`);
-            clearInterval(timer);
+    if (document.getElementById("user-input").value == getMorseCodeSlice()) {
+        if (document.getElementById("user-input").value == morseCodeSentence) {
+            success();
         }
         document.getElementById("user-input").style.backgroundColor = "rgba(0, 255, 0, 0.7)";
         // document.getElementById("user-input").style.backgroundColor = "green";
@@ -173,29 +180,49 @@ runTimer = () => {
     timer = setInterval(increaseTimer, 1000);
 }
 
-const element = document.getElementById("user-input");
-element.onkeyup = testingFunction;
-
 const moveShips = () => {
-    const titanic = document.getElementById("titanic-ship");
-    const cargoShip = document.getElementById("cargo-ship");
+    const titanic = document.getElementById("ship-left");
+    const cargoShip = document.getElementById("ship-right");
     let amount = 1;
-    
+
     const increaseAmount = () => {
         amount++;
+        // change flex to relative
+        titanic.style.position = "relative";
+        cargoShip.style.position = "relative";
         titanic.style.left = `${amount}px`;
         cargoShip.style.right = `${amount}px`;
+        // checkCollision();
+        console.log(amount);
+        console.log((intViewportWidth - 500 - 17) - (amount * 2));
+        // had to correct viewportWidth as actuall width is 17px less
+        if ((intViewportWidth - 500 - 17) - (amount * 2) <= 0) {
+            failure();
+        }
     }
+
+    // checkCollision = () => {
+    //     if(intViewportWidth - 500 - amount < 0) {
+    //         alert("Boom!")
+    //     }
+    // }
     // shipTimer = setInterval(() => amount++, 100);
     shipTimer = setInterval(increaseAmount, 100);
     console.log(amount);
-    
-    // titanic.style.left = `${seconds * 10}px`;
-    // titanic.style.left += `${10}px`;
-    // titanic.style.left += 10 + "px";
-    // titanic.style.left = `${amount}px`;
-    // cargoShip.style.right = `${seconds * 10}px`;
 }
+
+const success = () => {
+    clearInterval(timer);
+    clearInterval(shipTimer);
+    alert(`Great job!!! It took you ${seconds} seconds`);
+}
+
+const failure = () => {
+    clearInterval(timer);
+    clearInterval(shipTimer);
+    alert("Booooooom!!!!!!!!!")
+}
+
 
 
 

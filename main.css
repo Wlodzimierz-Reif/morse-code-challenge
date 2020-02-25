@@ -1,8 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   font-family: sans-serif;
 }
 
@@ -45,26 +43,29 @@ section #timer {
   height: 50px;
 }
 
-#titanic * {
-  border: 1px solid black;
+#titanic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #titanic div {
   height: 100px;
+  max-width: 1200px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 #titanic div img {
   height: 100px;
-  right: 0;
-}
-
-#titanic div #titanic-ship {
-  position: relative;
-  left: 150px;
-}
-
-#titanic div #cargo-ship {
-  position: absolute;
-  right: 150px;
+  width: 250px;
 }
 /*# sourceMappingURL=main.css.map */
