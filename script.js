@@ -161,6 +161,7 @@ const testingFunction = () => {
     getMorseCodeSlice();
 }
 
+// gets length output for dynamic content
 const getInputLength = () => {
     const input = document.getElementById("user-input").value;
     return input.length;

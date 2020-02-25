@@ -43,6 +43,10 @@ section #timer {
   height: 50px;
 }
 
+#titanic * {
+  border: 1px solid black;
+}
+
 #titanic {
   display: -webkit-box;
   display: -ms-flexbox;
