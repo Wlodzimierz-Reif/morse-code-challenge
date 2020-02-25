@@ -40,4 +40,31 @@ section form #buttons button {
   margin: 25px;
   padding: 5px;
 }
+
+section #timer {
+  height: 50px;
+}
+
+#titanic * {
+  border: 1px solid black;
+}
+
+#titanic div {
+  height: 100px;
+}
+
+#titanic div img {
+  height: 100px;
+  right: 0;
+}
+
+#titanic div #titanic-ship {
+  position: relative;
+  left: 150px;
+}
+
+#titanic div #cargo-ship {
+  position: absolute;
+  right: 150px;
+}
 /*# sourceMappingURL=main.css.map */

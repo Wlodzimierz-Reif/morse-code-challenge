@@ -112,6 +112,9 @@ const hardSets = {
 
 let sentence = "";
 let morseCodeSentence = "";
+let timer = null;
+let seconds = null;
+let shipTimer = null;
 
 const getRandomString = (setOfTestStrings) => {
     const string = Object.keys(setOfTestStrings);
@@ -119,28 +122,33 @@ const getRandomString = (setOfTestStrings) => {
     const result = string[index];
     const morseResult = setOfTestStrings[result];
 
-    // updateUserInterface(morseResult);
     sentence = result;
     morseCodeSentence = morseResult;
 
     return result;
 }
 
-// const updateUserInterface = (morseString) => {
-//     document.getElementById("string-output").innerHTML = morseString;
-// }
-
-
 const playEasy = () => {
     getRandomString(easySets);
     document.getElementById("string-output").innerHTML = sentence;
+    seconds = 0;
+    clearInterval(timer);
+
+    runTimer();
+    moveShips();
+
 }
 
-const test = () => {
-    if(document.getElementById("user-input").value == morseCodeSentence) {
-        document.getElementById("user-input").style.backgroundColor = "green";
+const testingFunction = () => {
+    if(document.getElementById("user-input").value == getMorseCodeSlice()) {
+        if(document.getElementById("user-input").value == morseCodeSentence) {
+            alert(`Great! It took you ${seconds} seconds`);
+            clearInterval(timer);
+        }
+        document.getElementById("user-input").style.backgroundColor = "rgba(0, 255, 0, 0.7)";
+        // document.getElementById("user-input").style.backgroundColor = "green";
     } else {
-        document.getElementById("user-input").style.backgroundColor = "red";
+        document.getElementById("user-input").style.backgroundColor = "rgba(255, 0, 0, 0.7)";
     }
     getInputLength();
     getMorseCodeSlice();
@@ -152,21 +160,42 @@ const getInputLength = () => {
 }
 
 const getMorseCodeSlice = () => {
-    const length = getInputLength() - 1;
-    console.log(`input length : ${length}`);
-    const morseArray = morseCodeSentence.split(" ");
-    // console.log(morseArray);
-    
-    const morseSlice = morseArray.slice(0, length);
-    console.log(`reference morse code slice: ${morseSlice}`);
-    const joinedArray = morseSlice.join(" ");
-    console.log(joinedArray);
-    
+    const length = getInputLength();
+    const morseCodeSlice = morseCodeSentence.slice(0, length);
+    return morseCodeSlice;
 }
 
+runTimer = () => {
+    const increaseTimer = () => {
+        seconds++;
+        document.getElementById("timer").innerHTML = seconds;
+    }
+    timer = setInterval(increaseTimer, 1000);
+}
 
+const element = document.getElementById("user-input");
+element.onkeyup = testingFunction;
 
-
+const moveShips = () => {
+    const titanic = document.getElementById("titanic-ship");
+    const cargoShip = document.getElementById("cargo-ship");
+    let amount = 1;
+    
+    const increaseAmount = () => {
+        amount++;
+        titanic.style.left = `${amount}px`;
+        cargoShip.style.right = `${amount}px`;
+    }
+    // shipTimer = setInterval(() => amount++, 100);
+    shipTimer = setInterval(increaseAmount, 100);
+    console.log(amount);
+    
+    // titanic.style.left = `${seconds * 10}px`;
+    // titanic.style.left += `${10}px`;
+    // titanic.style.left += 10 + "px";
+    // titanic.style.left = `${amount}px`;
+    // cargoShip.style.right = `${seconds * 10}px`;
+}
 
 
 
