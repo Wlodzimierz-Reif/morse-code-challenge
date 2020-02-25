@@ -110,28 +110,63 @@ const hardSets = {
     "But then maybe Alondra was one of those people who simply took a long time to warm to strangers": "-... ..- - / - .... . -. / -- .- -.-- -... . / .- .-.. --- -. -.. .-. .- / .-- .- ... / --- -. . / --- ..-. / - .... --- ... . / .--. . --- .--. .-.. . / .-- .... --- / ... .. -- .--. .-.. -.-- / - --- --- -.- / .- / .-.. --- -. --. / - .. -- . / - --- / .-- .- .-. -- / - --- / ... - .-. .- -. --. . .-. ..."
 }
 
+let sentence = "";
+let morseCodeSentence = "";
+
 const getRandomString = (setOfTestStrings) => {
     const string = Object.keys(setOfTestStrings);
     const index = Math.floor(Math.random() * (string.length));
     const result = string[index];
     const morseResult = setOfTestStrings[result];
 
-    updateUserInterface(morseResult);
+    // updateUserInterface(morseResult);
+    sentence = result;
+    morseCodeSentence = morseResult;
 
-    console.log(result);
-    console.log(morseResult);
     return result;
 }
 
-const updateUserInterface = (morseString) => {
-    document.getElementById("string-output").innerHTML = morseString;
-}
+// const updateUserInterface = (morseString) => {
+//     document.getElementById("string-output").innerHTML = morseString;
+// }
 
 
 const playEasy = () => {
-    const set = getRandomString(easySets);
-    document.getElementById("string-output").innerHTML = set;
+    getRandomString(easySets);
+    document.getElementById("string-output").innerHTML = sentence;
 }
+
+const test = () => {
+    if(document.getElementById("user-input").value == morseCodeSentence) {
+        document.getElementById("user-input").style.backgroundColor = "green";
+    } else {
+        document.getElementById("user-input").style.backgroundColor = "red";
+    }
+    getInputLength();
+    getMorseCodeSlice();
+}
+
+const getInputLength = () => {
+    const input = document.getElementById("user-input").value;
+    return input.length;
+}
+
+const getMorseCodeSlice = () => {
+    const length = getInputLength() - 1;
+    console.log(`input length : ${length}`);
+    const morseArray = morseCodeSentence.split(" ");
+    // console.log(morseArray);
+    
+    const morseSlice = morseArray.slice(0, length);
+    console.log(`reference morse code slice: ${morseSlice}`);
+    const joinedArray = morseSlice.join(" ");
+    console.log(joinedArray);
+    
+}
+
+
+
+
 
 
 
