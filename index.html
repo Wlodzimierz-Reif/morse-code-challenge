@@ -4,30 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css" />
     <script src="script.js" async defer></script>
     <title>Morse code translator</title>
   </head>
   <body>
-    <h1>Morse code translator</h1>
 
-    <section>
-      <form action="">
-        <textarea name="" id="text-input" cols="30" rows="10"></textarea>
-        <div id="buttons">
-          <button type="button" onclick="textToMorse()">
-            Translate to Morse code
-          </button>
-          <button type="button" onclick="decodeMorse()">
-            Translate Morse code
-          </button>
-        </div>
-        <textarea name="" id="text-output" cols="30" rows="10"></textarea>
-      </form>
-    </section>
+    <div class="jumbotron">
+      <h1 class="display-4">Morse code translator</h1>
+      <p class="lead">This is a simple project for translating text to morse code and vice versa</p>
+      <a class="btn btn-primary btn-lg" href="#translator" role="button">Translate</a>
+      <hr class="my-4">
+      <p>If you're feeling strong in this field you can also play a game and translate in limited time</p>
+      <a class="btn btn-primary btn" href="#game" role="button">Play!</a>
+    </div>
 
-    <section id="game">
+    <h1 id="translator">Translator</h1>
+
+    <div class="form-group d-flex justify-content-center">
+      <textarea class="form-control" id="text-input" placeholder="Put your text/morse code here" rows="3"></textarea>
+      
+      <!-- <div class="col-2 text-center btn-group" role="group" aria-label="Basic example"> -->
+        <button type="button" class="btn btn-secondary mx-2" onclick="textToMorse()">Translate to morse code</button>
+        <button type="button" class="btn btn-secondary mx-2" onclick="decodeMorse()">Translate morse code</button>
+      <!-- </div> -->
+      
+      <textarea class="form-control" id="text-output" placeholder="Translated text/morse code" rows="3" disabled></textarea>
+    </div>
+
+
+
+
+    <section id="game" class="mx-3">
       <h2>Game</h2>
+      <h4>Rules</h4>
       <ul>
         <li>1</li>
         <li>2</li>
@@ -36,23 +47,29 @@
         <li>5</li>
       </ul>
       <div>
-        <button onclick="playEasy()">Easy</button>
-        <button onclick="playMedium()">Medium</button>
-        <button onclick="playHard()">Hard</button>
+        <button class="btn btn-success"onclick="playEasy()">Easy</button>
+        <button class="btn btn-warning"onclick="playMedium()">Medium</button>
+        <button class="btn btn-danger"onclick="playHard()">Hard</button>
       </div>
-      <p id="string-output">Your text to translate</p>
-      <textarea id="user-input" name="" id="" cols="30" rows="10"></textarea>
-      <button onclick="test()">Test</button>
+      <p>Your text to translate</p>
+      <p id="string-output"></p>
+   <textarea class="form-control" id="user-input" placeholder="Translated text/morse code" rows="3"></textarea>
       <div>
           <p id="timer"></p>
       </div>
     </section>
 
     <section id="titanic">
-      <div>
+
+      <div id="ships-container" class="mb-5">
         <img id="ship-left" src="./images/ship-left.png" alt="" />
         <img id="ship-right" src="./images/ship-right.png" alt="" />
       </div>
     </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>

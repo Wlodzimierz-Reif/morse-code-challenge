@@ -5,7 +5,7 @@ const alphabet = {
     'm': '--', 'n': '-.', 'o': '---', 'p': '.--.',
     'q': '--.-', 'r': '.-.', 's': '...', 't': '-',
     'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-',
-    'y': '-.--', 'z': '--..', ' ': '/',
+    'y': '-.--', 'z': '--..', ' ': '   ',
     '1': '.----', '2': '..---', '3': '...--', '4': '....-',
     '5': '.....', '6': '-....', '7': '--...', '8': '---..',
     '9': '----.', '0': '-----',
@@ -48,13 +48,14 @@ const morseAlphabet = {
     "-..-": "x",
     "-.--": "y",
     "--..": "z",
-    "/": " ",
+    "   ": " ",
     "-·-·--": "!",
     "·-·-·-": ".",
     "--··--": ","
 }
 
 const textToMorse = () => {
+    document.querySelector('#text-output').innerHTML = "";
     const string = document.querySelector('#text-input').value;
     const regex = RegExp("^[a-zA-Z0-9 ]*$");
     if (regex.test(string)) {
@@ -68,46 +69,41 @@ const textToMorse = () => {
 
 const decodeMorse = () => {
     const morseCode = document.querySelector('#text-input').value;
-    // const regex = RegExp("/^[.-]{1,5}(?:[ \t]+[.-]{1,5})*(?:[ \t]+[.-]{1,5}(?:[ \t]+[.-]{1,5})*)*$/");
-    // if(regex.test(morseCode)) {
-    const output = morseCode.split('/');
+    const regex = RegExp("^[.-]{1,5}(?:[ \t]+[.-]{1,5})*(?:[ \t]+[.-]{1,5}(?:[ \t]+[.-]{1,5})*)*$");
+    if(regex.test(morseCode)) {
+    const output = morseCode.split('   ');
     const output2 = output.map(word => word.split(' ').map(letter => morseAlphabet[letter]).join(''));
     return document.querySelector('#text-output').innerHTML = output2.join(' ');
-    // } else {
-    //     return document.querySelector('#text-output').innerHTML = 'Use only morse code characters';
-    // }
+    } else {
+        return document.querySelector('#text-output').innerHTML = 'Use only morse code characters';
+    }
 }
 
-
-
-
-
-
 const easySets = {
-    "I ate dinner": ".. / .- - . / -.. .. -. -. . .-.",
-    "We had a three-course meal": ".-- . / .... .- -.. / .- / - .... .-. . . / -.-. --- ..- .-. ... . / -- . .- .-..",
-    "Brad came to dinner with us": "-... .-. .- -.. / -.-. .- -- . / - --- / -.. .. -. -. . .-. / .-- .. - .... / ..- ...",
-    "He loves fish tacos": ".... . / .-.. --- ...- . ... / ..-. .. ... .... / - .- -.-. --- ...",
-    "In the end we all felt like we ate too much": ".. -. / - .... . / . -. -.. / .-- . / .- .-.. .-.. / ..-. . .-.. - / .-.. .. -.- . / .-- . / .- - . / - --- --- / -- ..- -.-. ....",
-    "We all agreed; it was a magnificent evening": ".-- . / .- .-.. .-.. / .- --. .-. . . -.. / .. - / .-- .- ... / .- / -- .- --. -. .. ..-. .. -.-. . -. - / . ...- . -. .. -. --."
+    "I ate dinner": "..   .- - .   -.. .. -. -. . .-.",
+    "We had a three course meal": ".-- .   .... .- -..   .-   - .... .-. . .   -.-. --- ..- .-. ... .   -- . .- .-..",
+    "Brad came to dinner with us": "-... .-. .- -..   -.-. .- -- .   - ---   -.. .. -. -. . .-.   .-- .. - ....   ..- ...",
+    "He loves fish tacos": ".... .   .-.. --- ...- . ...   ..-. .. ... ....   - .- -.-. --- ...",
+    "In the end we all felt like we ate too much": ".. -.   - .... .   . -. -..   .-- .   .- .-.. .-..   ..-. . .-.. -   .-.. .. -.- .   .-- .   .- - .   - --- ---   -- ..- -.-. ....",
+    "We all agreed it was a magnificent evening": ".-- .   .- .-.. .-..   .- --. .-. . . -..   .. -   .-- .- ...   .-   -- .- --. -. .. ..-. .. -.-. . -. -   . ...- . -. .. -. --."
 }
 
 const mediumSets = {
-    "I hope that when I have built up my savings I will be able to travel to Mexico": ".. / .... --- .--. . / - .... .- - / .-- .... . -. / .. / .... .- ...- . / -... ..- .. .-.. - / ..- .--. / -- -.-- / ... .- ...- .. -. --. ... / .. / .-- .. .-.. .-.. / -... . / .- -... .-.. . / - --- / - .-. .- ...- . .-.. / - --- / -- . -..- .. -.-. ---",
-    "Did you know that along with gorgeous architecture it is home to the largest tamale": "-.. .. -.. / -.-- --- ..- / -.- -. --- .-- / - .... .- - / .- .-.. --- -. --. / .-- .. - .... / --. --- .-. --. . --- ..- ... / .- .-. -.-. .... .. - . -.-. - ..- .-. . / .. - / .. ... / .... --- -- . / - --- / - .... . / .-.. .- .-. --. . ... - / - .- -- .- .-.. .",
-    "Would not it be lovely to enjoy a week soaking up the culture": ".-- --- ..- .-.. -.. / -. --- - / .. - / -... . / .-.. --- ...- . .-.. -.-- / - --- / . -. .--- --- -.-- / .- / .-- . . -.- / ... --- .- -.- .. -. --. / ..- .--. / - .... . / -.-. ..- .-.. - ..- .-. .",
-    "Of all the places to travel Mexico is at the top of my list": "--- ..-. / .- .-.. .-.. / - .... . / .--. .-.. .- -.-. . ... / - --- / - .-. .- ...- . .-.. / -- . -..- .. -.-. --- / .. ... / .- - / - .... . / - --- .--. / --- ..-. / -- -.-- / .-.. .. ... -",
-    "Once you know all the elements it is not difficult to pull together a sentence": "--- -. -.-. . / -.-- --- ..- / -.- -. --- .-- / .- .-.. .-.. / - .... . / . .-.. . -- . -. - ... / .. - / .. ... / -. --- - / -.. .. ..-. ..-. .. -.-. ..- .-.. - / - --- / .--. ..- .-.. .-.. / - --- --. . - .... . .-. / .- / ... . -. - . -. -.-. .",
-    "My mother hemmed and hawed over where to go for dinner": "-- -.-- / -- --- - .... . .-. / .... . -- -- . -.. / .- -. -.. / .... .- .-- . -.. / --- ...- . .-. / .-- .... . .-. . / - --- / --. --- / ..-. --- .-. / -.. .. -. -. . .-."
+    "I hope that when I have built up my savings I will be able to travel to Mexico": "..   .... --- .--. .   - .... .- -   .-- .... . -.   ..   .... .- ...- .   -... ..- .. .-.. -   ..- .--.   -- -.--   ... .- ...- .. -. --. ...   ..   .-- .. .-.. .-..   -... .   .- -... .-.. .   - ---   - .-. .- ...- . .-..   - ---   -- . -..- .. -.-. ---",
+    "Did you know that along with gorgeous architecture it is home to the largest tamale": "-.. .. -..   -.-- --- ..-   -.- -. --- .--   - .... .- -   .- .-.. --- -. --.   .-- .. - ....   --. --- .-. --. . --- ..- ...   .- .-. -.-. .... .. - . -.-. - ..- .-. .   .. -   .. ...   .... --- -- .   - ---   - .... .   .-.. .- .-. --. . ... -   - .- -- .- .-.. .",
+    "Would not it be lovely to enjoy a week soaking up the culture": ".-- --- ..- .-.. -..   -. --- -   .. -   -... .   .-.. --- ...- . .-.. -.--   - ---   . -. .--- --- -.--   .-   .-- . . -.-   ... --- .- -.- .. -. --.   ..- .--.   - .... .   -.-. ..- .-.. - ..- .-. .",
+    "Of all the places to travel Mexico is at the top of my list": "--- ..-.   .- .-.. .-..   - .... .   .--. .-.. .- -.-. . ...   - ---   - .-. .- ...- . .-..   -- . -..- .. -.-. ---   .. ...   .- -   - .... .   - --- .--.   --- ..-.   -- -.--   .-.. .. ... -",
+    "Once you know all the elements it is not difficult to pull together a sentence": "--- -. -.-. .   -.-- --- ..-   -.- -. --- .--   .- .-.. .-..   - .... .   . .-.. . -- . -. - ...   .. -   .. ...   -. --- -   -.. .. ..-. ..-. .. -.-. ..- .-.. -   - ---   .--. ..- .-.. .-..   - --- --. . - .... . .-.   .-   ... . -. - . -. -.-. .",
+    "My mother hemmed and hawed over where to go for dinner": "-- -.--   -- --- - .... . .-.   .... . -- -- . -..   .- -. -..   .... .- .-- . -..   --- ...- . .-.   .-- .... . .-. .   - ---   --. ---   ..-. --- .-.   -.. .. -. -. . .-."
 }
 
 const hardSets = {
-    "They put her through college and it was her intent to stay with them as long as they needed her": "- .... . -.-- / .--. ..- - / .... . .-. / - .... .-. --- ..- --. .... / -.-. --- .-.. .-.. . --. . / .- -. -.. / .. - / .-- .- ... / .... . .-. / .. -. - . -. - / - --- / ... - .- -.-- / .-- .. - .... / - .... . -- / .- ... / .-.. --- -. --. / .- ... / - .... . -.-- / -. . . -.. . -.. / .... . .-.",
-    "I quickly put on my red winter jacket black snow pants waterproof boots homemade mittens and handknit scarf": ".. / --.- ..- .. -.-. -.- .-.. -.-- / .--. ..- - / --- -. / -- -.-- / .-. . -.. / .-- .. -. - . .-. / .--- .- -.-. -.- . - / -... .-.. .- -.-. -.- / ... -. --- .-- / .--. .- -. - ... / .-- .- - . .-. .--. .-. --- --- ..-. / -... --- --- - ... / .... --- -- . -- .- -.. . / -- .. - - . -. ... / .- -. -.. / .... .- -. -.. -.- -. .. - / ... -.-. .- .-. ..-.",
-    "They sat in a heavy flat bottomed boat each holding a long crooked rod in his hands and eagerly waiting for a bite": "- .... . -.-- / ... .- - / .. -. / .- / .... . .- ...- -.-- / ..-. .-.. .- - / -... --- - - --- -- . -.. / -... --- .- - / . .- -.-. .... / .... --- .-.. -.. .. -. --. / .- / .-.. --- -. --. / -.-. .-. --- --- -.- . -.. / .-. --- -.. / .. -. / .... .. ... / .... .- -. -.. ... / .- -. -.. / . .- --. . .-. .-.. -.-- / .-- .- .. - .. -. --. / ..-. --- .-. / .- / -... .. - .",
-    "Yes there it was all quivering in the warm sunshine its blossom laden branches almost touching the long grass": "-.-- . ... / - .... . .-. . / .. - / .-- .- ... / .- .-.. .-.. / --.- ..- .. ...- . .-. .. -. --. / .. -. / - .... . / .-- .- .-. -- / ... ..- -. ... .... .. -. . / .. - ... / -... .-.. --- ... ... --- -- / .-.. .- -.. . -. / -... .-. .- -. -.-. .... . ... / .- .-.. -- --- ... - / - --- ..- -.-. .... .. -. --. / - .... . / .-.. --- -. --. / --. .-. .- ... ...",
-    "As proud as she was of Jonathan it was Alex who stayed on her mind for a long time after the phone call": ".- ... / .--. .-. --- ..- -.. / .- ... / ... .... . / .-- .- ... / --- ..-. / .--- --- -. .- - .... .- -. / .. - / .-- .- ... / .- .-.. . -..- / .-- .... --- / ... - .- -.-- . -.. / --- -. / .... . .-. / -- .. -. -.. / ..-. --- .-. / .- / .-.. --- -. --. / - .. -- . / .- ..-. - . .-. / - .... . / .--. .... --- -. . / -.-. .- .-.. .-..",
-    "But then maybe Alondra was one of those people who simply took a long time to warm to strangers": "-... ..- - / - .... . -. / -- .- -.-- -... . / .- .-.. --- -. -.. .-. .- / .-- .- ... / --- -. . / --- ..-. / - .... --- ... . / .--. . --- .--. .-.. . / .-- .... --- / ... .. -- .--. .-.. -.-- / - --- --- -.- / .- / .-.. --- -. --. / - .. -- . / - --- / .-- .- .-. -- / - --- / ... - .-. .- -. --. . .-. ..."
+    "They put her through college and it was her intent to stay with them as long as they needed her": "- .... . -.--   .--. ..- -   .... . .-.   - .... .-. --- ..- --. ....   -.-. --- .-.. .-.. . --. .   .- -. -..   .. -   .-- .- ...   .... . .-.   .. -. - . -. -   - ---   ... - .- -.--   .-- .. - ....   - .... . --   .- ...   .-.. --- -. --.   .- ...   - .... . -.--   -. . . -.. . -..   .... . .-.",
+    "I quickly put on my red winter jacket black snow pants waterproof boots homemade mittens and handknit scarf": "..   --.- ..- .. -.-. -.- .-.. -.--   .--. ..- -   --- -.   -- -.--   .-. . -..   .-- .. -. - . .-.   .--- .- -.-. -.- . -   -... .-.. .- -.-. -.-   ... -. --- .--   .--. .- -. - ...   .-- .- - . .-. .--. .-. --- --- ..-.   -... --- --- - ...   .... --- -- . -- .- -.. .   -- .. - - . -. ...   .- -. -..   .... .- -. -.. -.- -. .. -   ... -.-. .- .-. ..-.",
+    "They sat in a heavy flat bottomed boat each holding a long crooked rod in his hands and eagerly waiting for a bite": "- .... . -.--   ... .- -   .. -.   .-   .... . .- ...- -.--   ..-. .-.. .- -   -... --- - - --- -- . -..   -... --- .- -   . .- -.-. ....   .... --- .-.. -.. .. -. --.   .-   .-.. --- -. --.   -.-. .-. --- --- -.- . -..   .-. --- -..   .. -.   .... .. ...   .... .- -. -.. ...   .- -. -..   . .- --. . .-. .-.. -.--   .-- .- .. - .. -. --.   ..-. --- .-.   .-   -... .. - .",
+    "Yes there it was all quivering in the warm sunshine its blossom laden branches almost touching the long grass": "-.-- . ...   - .... . .-. .   .. -   .-- .- ...   .- .-.. .-..   --.- ..- .. ...- . .-. .. -. --.   .. -.   - .... .   .-- .- .-. --   ... ..- -. ... .... .. -. .   .. - ...   -... .-.. --- ... ... --- --   .-.. .- -.. . -.   -... .-. .- -. -.-. .... . ...   .- .-.. -- --- ... -   - --- ..- -.-. .... .. -. --.   - .... .   .-.. --- -. --.   --. .-. .- ... ...",
+    "As proud as she was of Jonathan it was Alex who stayed on her mind for a long time after the phone call": ".- ...   .--. .-. --- ..- -..   .- ...   ... .... .   .-- .- ...   --- ..-.   .--- --- -. .- - .... .- -.   .. -   .-- .- ...   .- .-.. . -..-   .-- .... ---   ... - .- -.-- . -..   --- -.   .... . .-.   -- .. -. -..   ..-. --- .-.   .-   .-.. --- -. --.   - .. -- .   .- ..-. - . .-.   - .... .   .--. .... --- -. .   -.-. .- .-.. .-..",
+    "But then maybe Alondra was one of those people who simply took a long time to warm to strangers": "-... ..- -   - .... . -.   -- .- -.-- -... .   .- .-.. --- -. -.. .-. .-   .-- .- ...   --- -. .   --- ..-.   - .... --- ... .   .--. . --- .--. .-.. .   .-- .... ---   ... .. -- .--. .-.. -.--   - --- --- -.-   .-   .-.. --- -. --.   - .. -- .   - ---   .-- .- .-. --   - ---   ... - .-. .- -. --. . .-. ..."
 }
 
 let sentence = "";
@@ -117,7 +113,7 @@ let timer = null;
 let seconds = null;
 let shipTimer = null;
 let intViewportWidth = 0;
-window.innerWidth > 1200 ? intViewportWidth = 1200: intViewportWidth = window.innerWidth;
+window.innerWidth > 1000 ? intViewportWidth = 1000: intViewportWidth = window.innerWidth;
 
 
 const getRandomString = (setOfTestStrings) => {
@@ -137,10 +133,26 @@ const playEasy = () => {
     document.getElementById("string-output").innerHTML = sentence;
     seconds = 0; 
     clearInterval(timer); 
-
     runTimer();
-    moveShips();
+    moveShips(200);
+}
 
+const playMedium = () => {
+    getRandomString(mediumSets);
+    document.getElementById("string-output").innerHTML = sentence;
+    seconds = 0; 
+    clearInterval(timer); 
+    runTimer();
+    moveShips(100);
+}
+
+const playHard = () => {
+    getRandomString(hardSets);
+    document.getElementById("string-output").innerHTML = sentence;
+    seconds = 0; 
+    clearInterval(timer); 
+    runTimer();
+    moveShips(50);
 }
 
 const testingFunction = () => {
@@ -177,23 +189,22 @@ runTimer = () => {
     timer = setInterval(increaseTimer, 1000);
 }
 
-const moveShips = () => {
+const moveShips = (speed) => {
     const titanic = document.getElementById("ship-left");
     const cargoShip = document.getElementById("ship-right");
     let amount = 1;
 
     const increaseAmount = () => {
         amount++;
-        // change flex to relative
         titanic.style.position = "relative";
         cargoShip.style.position = "relative";
         titanic.style.left = `${amount}px`;
         cargoShip.style.right = `${amount}px`;
         // checkCollision();
         console.log(amount);
-        console.log((intViewportWidth - 500 - 17) - (amount * 2));
-        // had to correct viewportWidth as actuall width is 17px less
-        if ((intViewportWidth - 500 - 17) - (amount * 2) <= 0) {
+        console.log((intViewportWidth - 500) - (amount * 2));
+        // had to correct viewportWidth as actuall width is 17px less when console is forcing div containing ships < 1000px
+        if ((intViewportWidth - 500) - (amount * 2) <= 0) {
             failure();
         }
     }
@@ -204,8 +215,7 @@ const moveShips = () => {
     //     }
     // }
     // shipTimer = setInterval(() => amount++, 100);
-    shipTimer = setInterval(increaseAmount, 100);
-    console.log(amount);
+    shipTimer = setInterval(increaseAmount, speed);
 }
 
 const success = () => {
@@ -217,7 +227,8 @@ const success = () => {
 const failure = () => {
     clearInterval(timer);
     clearInterval(shipTimer);
-    alert("Booooooom!!!!!!!!!")
+    // alert("Booooooom!!!!!!!!!")
+    document.getElementById("titanic").classList.add("boom");
 }
 
 
