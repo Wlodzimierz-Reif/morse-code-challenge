@@ -49,6 +49,7 @@ section {
     width: 100%;
     display: flex;
     justify-content: space-between;
+   
 
     img {
       height: 100px;
@@ -70,6 +71,12 @@ section {
 
 .boom {
   // background: radial-gradient(white, red);
-  background-color: red;
-  transition: background-color 2s ease;
+  // background-color: radial-gradient(red, white);
+  background-image: "images/gradient.png";
+  background-image: url(./images/gradient.png);
+  opacity: 1;
+  transition: opacity 2s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }

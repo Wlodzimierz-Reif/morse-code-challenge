@@ -68,8 +68,13 @@ section #timer {
 }
 
 .boom {
-  background-color: red;
-  -webkit-transition: background-color 2s ease;
-  transition: background-color 2s ease;
+  background-image: "images/gradient.png";
+  background-image: url(./images/gradient.png);
+  opacity: 1;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 /*# sourceMappingURL=main.css.map */

@@ -228,7 +228,7 @@ const failure = () => {
     clearInterval(timer);
     clearInterval(shipTimer);
     // alert("Booooooom!!!!!!!!!")
-    document.getElementById("titanic").classList.add("boom");
+    document.getElementById("ships-container").classList.add("boom");
 }
 
 
