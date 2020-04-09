@@ -1,0 +1,82 @@
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+//   font-family: sans-serif;
+// }
+
+h1 {
+  text-align: center;
+}
+
+textarea {
+  font-size: 1rem;
+}
+
+section {
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #buttons {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin: 25px;
+        padding: 5px;
+      }
+    }
+  }
+  #timer {
+    height: 50px;
+  }
+}
+
+#titanic * {
+    border: 1px solid black;
+}
+
+#titanic {
+
+  display: flex;
+  justify-content: center;
+
+  div {
+    height: 100px;
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+   
+
+    img {
+      height: 100px;
+      width: 250px;
+    //   right: 0;
+    }
+
+    // #ship-left {
+    //   position: relative;
+    //   left: 150px;
+    // }
+
+    // #ship-right {
+    //   position: absolute;
+    //   right: 150px;
+    // }
+  }
+}
+
+.boom {
+  // background: radial-gradient(white, red);
+  // background-color: radial-gradient(red, white);
+  background-image: "images/gradient.png";
+  background-image: url(./images/gradient.png);
+  opacity: 1;
+  transition: opacity 2s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

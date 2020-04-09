@@ -1,0 +1,80 @@
+h1 {
+  text-align: center;
+}
+
+textarea {
+  font-size: 1rem;
+}
+
+section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+section form #buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section form #buttons button {
+  margin: 25px;
+  padding: 5px;
+}
+
+section #timer {
+  height: 50px;
+}
+
+#titanic * {
+  border: 1px solid black;
+}
+
+#titanic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#titanic div {
+  height: 100px;
+  max-width: 1000px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#titanic div img {
+  height: 100px;
+  width: 250px;
+}
+
+.boom {
+  background-image: "images/gradient.png";
+  background-image: url(./images/gradient.png);
+  opacity: 1;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+/*# sourceMappingURL=main.css.map */
