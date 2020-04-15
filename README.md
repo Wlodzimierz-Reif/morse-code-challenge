@@ -5,6 +5,7 @@ Our first challenge set by coaches after first week with Javascript. This websit
 - HTML
 - CSS
 - Javascript
+- Bootstrap
           
 # How to use
 1. Clone the repository
